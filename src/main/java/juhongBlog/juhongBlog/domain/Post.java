@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -20,6 +21,20 @@ public class Post {
     @ManyToOne(cascade = CascadeType.MERGE, targetEntity = User.class)
     @JoinColumn(name = "user_id", updatable = false)
     private User user;
+
+    @OneToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @OneToOne
+    @JoinColumn(name = "tag_id")
+    private Tag tag;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.MERGE, orphanRemoval = true)
+    private List<Comment> comment = new ArrayList<>();
+
+
+
 
     @Column(length = 15, nullable = false)
     private String title;

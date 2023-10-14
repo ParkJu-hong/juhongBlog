@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserController {
     private final UserRepository userRepository;
 
+    // 회원가입
     @PostMapping("user/save")
     @ResponseBody // 이 어노테이션을 추가하여 문자열을 직접 반환할 수 있게 됩니다.
     public String userJoin(@RequestBody User user) {
@@ -21,4 +22,15 @@ public class UserController {
 
         return "성공적으로 Join 되었습니다.";
     }
+
+    // 로그인
+
+    // 아이디 찾기
+
+    // 비밀번호 찾기
+
+    // 비밀번호 변경
+
+    // 사용자 정보 조회
+
 }
