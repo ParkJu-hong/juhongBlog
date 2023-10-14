@@ -33,7 +33,8 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Comment> comment = new ArrayList<>();
 
-
+    @OneToMany(mappedBy = "post", cascade = CascadeType.MERGE, orphanRemoval = true)
+    private List<Image> image = new ArrayList<>();
 
 
     @Column(length = 15, nullable = false)
