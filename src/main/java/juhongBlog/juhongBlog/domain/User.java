@@ -37,6 +37,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Comment> comment = new ArrayList<>();
 
+
     @Builder
     public User(String name, String password, String email, String created_at) {
         this.name = name;

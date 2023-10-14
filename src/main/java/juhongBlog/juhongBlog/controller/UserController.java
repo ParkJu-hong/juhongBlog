@@ -4,6 +4,7 @@ import juhongBlog.juhongBlog.domain.User;
 import juhongBlog.juhongBlog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,6 +13,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequiredArgsConstructor
 public class UserController {
     private final UserRepository userRepository;
+
+    // 테스트
+    @GetMapping("user")
+    @ResponseBody
+    public String test() {
+        return "테스트";
+    }
+
+    @GetMapping("/")
+    @ResponseBody
+    public String test2() {
+        return "테스트2";
+    }
 
     // 회원가입
     @PostMapping("user/save")

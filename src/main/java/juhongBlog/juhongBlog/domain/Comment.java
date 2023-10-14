@@ -26,7 +26,7 @@ public class Comment {
     @JoinColumn(name = "post_id", updatable = false)
     private Post post;
 
-    @ManyToOne(cascade = CascadeType.MERGE, targetEntity = Post.class)
+    @ManyToOne(cascade = CascadeType.MERGE, targetEntity = User.class)
     @JoinColumn(name = "user_id", updatable = false)
     private User user;
 
