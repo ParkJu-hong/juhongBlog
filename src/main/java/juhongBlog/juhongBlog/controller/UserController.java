@@ -6,10 +6,7 @@ import juhongBlog.juhongBlog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.Map;
@@ -69,6 +66,16 @@ public class UserController {
                 .build()).getId();
     }
 
+    @GetMapping("/test")
+    @ResponseBody
+    public String testOne(@RequestHeader("X-AUTH-TOKEN") String token) {
+        if( jwtTokenProvider.validateToken(token)) {
+            return "토큰 유효함";
+        }else {
+            return "토큰 유효하지 않음";
+        }
+    }
+
     // 로그인
     @PostMapping("/login")
     @ResponseBody
@@ -80,5 +87,6 @@ public class UserController {
         }
         return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
     }
+
 
 }
