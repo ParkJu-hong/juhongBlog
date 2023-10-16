@@ -50,10 +50,14 @@ public class User implements UserDetails {
 
 
     @Builder
-    public User(String name, String password, String email, List<String> roles) {
+    public User(String name, String password, String email, List<String> roles, Long id) {
 
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        if(id != null) {
+            this.id = id;
+        }
 
         this.name = name;
         this.password = password;
