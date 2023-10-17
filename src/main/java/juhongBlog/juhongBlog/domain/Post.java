@@ -50,7 +50,27 @@ public class Post {
     private String updated_at;
 
     @Builder
-    public Post(String title, String content, String created_at, String updated_at) {
+    public Post(String title, String content, String created_at, String updated_at, User user,Category category, Tag tag, List<Image> image,  List<Comment> comment, Long id) {
+
+        if(user != null){
+            this.user = user;
+        }
+        if(category != null) {
+            this.category = category;
+        }
+        if(tag != null) {
+            this.tag = tag;
+        }
+        if(comment != null) {
+            this.comment = comment;
+        }
+        if(image != null) {
+            this.image = image;
+        }
+        if(id != null) {
+            this.id = id;
+        }
+
         this.title = title;
         this.content = content;
         this.created_at = created_at;
