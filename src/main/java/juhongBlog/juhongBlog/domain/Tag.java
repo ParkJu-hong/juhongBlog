@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -23,7 +23,7 @@ public class Tag {
     private String name;
 
     @ManyToMany(mappedBy = "tag")
-    private Set<Post> post;
+    private List<Post> post;
 
     @Builder
     public Tag(String name) {

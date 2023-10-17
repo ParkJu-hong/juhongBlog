@@ -76,11 +76,4 @@ public class PostController {
         return postService.findAll();
     }
 
-    // 해당 카테고리의 게시물 조회
-    @GetMapping("post/findAllPostByCategory/{id}")
-    @ResponseBody
-    public List<Post> findAllPostByCategory(@PathVariable("id") Long id) {
-        return categoryService.findAllPostByCategory(id);
-    }
-
 }

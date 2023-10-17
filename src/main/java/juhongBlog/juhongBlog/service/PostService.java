@@ -61,7 +61,8 @@ public class PostService {
                 }
             }
         }
-
+        List<Tag> __tag = new ArrayList<>();
+        __tag.add(tagRepository.findById(_tagId).get());
         postRepository.save(Post.builder()
                 .title(post.getTitle())
                 .content(post.getContent())
@@ -69,7 +70,7 @@ public class PostService {
                         .updated_at(format.format(date))
                         .user(userRepository.findById(_userId).get())
                         .category(categoryRepository.findById(_categoryId).get())
-                        .tag(tagRepository.findById(_tagId).get())
+                        .tag(__tag)
                         .image(_images)
                         .build()
                 );
@@ -114,6 +115,8 @@ public class PostService {
                 }
             }
         }
+        List<Tag> __tag = new ArrayList<>();
+        __tag.add(tagRepository.findById(_tagId).get());
 
         postRepository.save(Post.builder()
                 .id(postId)
@@ -122,7 +125,7 @@ public class PostService {
                 .updated_at(format.format(date))
                 .user(userRepository.findById(_userId).get())
                 .category(categoryRepository.findById(_categoryId).get())
-                .tag(tagRepository.findById(_tagId).get())
+                .tag(__tag)
                 .image(_images)
                 .build()
         );
