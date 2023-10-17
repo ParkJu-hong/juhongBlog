@@ -22,8 +22,8 @@ public class Post {
     @JoinColumn(name = "user_id", updatable = false)
     private User user;
 
-    @OneToOne
-    @JoinColumn(name = "category_id")
+    @ManyToOne(cascade = CascadeType.MERGE, targetEntity = User.class)
+    @JoinColumn(name = "category_id", updatable = false)
     private Category category;
 
     @OneToOne

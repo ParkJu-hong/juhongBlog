@@ -24,6 +24,7 @@ public class PostService {
     private final CommentRepository commentRepository;
     private final ImageRepository imageRepository;
 
+
     // 게시물 게시
     public String createPost(Post post, Long userId, Long categoryId, Long tagId, List<Image> images){
         Date date = new Date();
@@ -68,6 +69,7 @@ public class PostService {
                         .created_at(format.format(date))
                         .updated_at(format.format(date))
                         .user(userRepository.findById(_userId).get())
+                        .category(categoryRepository.findById(_categoryId).get())
                         .tag(tagRepository.findById(_tagId).get())
                         .image(_images)
                         .build()
@@ -120,6 +122,7 @@ public class PostService {
                 .content(post.getContent())
                 .updated_at(format.format(date))
                 .user(userRepository.findById(_userId).get())
+                .category(categoryRepository.findById(_categoryId).get())
                 .tag(tagRepository.findById(_tagId).get())
                 .image(_images)
                 .build()

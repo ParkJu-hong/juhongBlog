@@ -2,7 +2,7 @@ package juhongBlog.juhongBlog.controller;
 
 
 import juhongBlog.juhongBlog.domain.*;
-import juhongBlog.juhongBlog.repository.PostRepository;
+import juhongBlog.juhongBlog.service.CategoryService;
 import juhongBlog.juhongBlog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,8 +13,9 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class PostController {
-    private final PostRepository postRepository;
     private final PostService postService;
+    private final CategoryService categoryService;
+
 
     // 게시물 게시
     @PostMapping("post/create")
@@ -69,11 +70,17 @@ public class PostController {
     }
 
     // 게시물 총 조회
-
     @GetMapping("post/findAll")
     @ResponseBody
     public List<Post> findAll() {
         return postService.findAll();
+    }
+
+    // 해당 카테고리의 게시물 조회
+    @GetMapping("post/findAllPostByCategory/{id}")
+    @ResponseBody
+    public List<Post> findAllPostByCategory(@PathVariable("id") Long id) {
+        return categoryService.findAllPostByCategory(id);
     }
 
 }
