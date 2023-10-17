@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @NoArgsConstructor
@@ -26,9 +27,13 @@ public class Post {
     @JoinColumn(name = "category_id", updatable = false)
     private Category category;
 
-    @OneToOne
-    @JoinColumn(name = "tag_id")
-    private Tag tag;
+    @ManyToMany
+    @JoinTable(
+            name = "post_tags",
+            joinColumns = @JoinColumn(name = "post_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private Set<Tag> tag;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Comment> comment = new ArrayList<>();
@@ -50,7 +55,7 @@ public class Post {
     private String updated_at;
 
     @Builder
-    public Post(String title, String content, String created_at, String updated_at, User user,Category category, Tag tag, List<Image> image,  List<Comment> comment, Long id) {
+    public Post(String title, String content, String created_at, String updated_at, User user,Category category, Set<Tag> tag, List<Image> image,  List<Comment> comment, Long id) {
 
         if(user != null){
             this.user = user;

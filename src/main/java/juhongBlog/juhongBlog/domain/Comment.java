@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Getter
 @NoArgsConstructor
 @Entity
@@ -31,9 +34,19 @@ public class Comment {
     private User user;
 
     @Builder
-    public Comment(String content, String created_at) {
+    public Comment(String content, User user, Post post) {
+        if(user != null) {
+            this.user = user;
+        }
+
+        if(post != null) {
+            this.post = post;
+        }
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         this.content = content;
-        this.created_at = created_at;
+        this.created_at = format.format(date);;
     }
 
 }

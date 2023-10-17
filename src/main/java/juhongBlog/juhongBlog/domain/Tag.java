@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Getter
 @NoArgsConstructor
 @Entity
@@ -20,8 +22,8 @@ public class Tag {
     @Column(length = 15, nullable = false)
     private String name;
 
-    @OneToOne(mappedBy = "tag")
-    private Post post;
+    @ManyToMany(mappedBy = "tag")
+    private Set<Post> post;
 
     @Builder
     public Tag(String name) {
