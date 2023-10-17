@@ -18,24 +18,24 @@ public class PostController {
 
 
     // 게시물 게시
-    @PostMapping("post/create")
+    @PostMapping("/user/post/create")
     @ResponseBody
-    public String createPost(@RequestBody Post post, Long userId, Long categoryId, Long tagId, List<Image> images) {
-        return postService.createPost(post, userId, categoryId, tagId, images);
+    public String createPost(@RequestBody Post post, Long userId, Long categoryId, Long tagId, List<Image> images, @RequestHeader("X-AUTH-TOKEN") String token) {
+        return postService.createPost(post, userId, categoryId, tagId, images, token);
     }
 
     // 게시물 수정
-    @PostMapping("post/update")
+    @PostMapping("/user/post/update")
     @ResponseBody
-    public String updatePost(Long postId, Post post, Long userId, Long categoryId, Long tagId, List<Image> images) {
-        return postService.updatePost(postId, post, userId, categoryId, tagId, images);
+    public String updatePost(Long postId, Post post, Long userId, Long categoryId, Long tagId, List<Image> images, @RequestHeader("X-AUTH-TOKEN") String token) {
+        return postService.updatePost(postId, post, userId, categoryId, tagId, images, token);
     }
 
     // 게시물 삭제
-    @GetMapping("post/delete/{id}")
+    @GetMapping("/admin/post/delete/{id}")
     @ResponseBody
-    public String deletePost(@PathVariable("id") Long id) {
-        return postService.deletePost(id);
+    public String deletePost(@PathVariable("id") Long id, @RequestHeader("X-AUTH-TOKEN") String token) {
+        return postService.deletePost(id, token);
     }
 
     // 게시물 검색 (부분조회)

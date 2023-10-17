@@ -68,7 +68,11 @@ public class UserService {
     }
 
     // 비밀번호 변경
-    public String changePassword(Long userId, String beforePassword,String afterPassWord){
+    public String changePassword(Long userId, String beforePassword,String afterPassWord, String token){
+        if(!jwtTokenProvider.validateToken(token)) {
+            return "토큰 유효하지 않음";
+        }
+
         User member = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 userId 입니다."));
         if (!passwordEncoder.matches(beforePassword, member.getPassword())) {
@@ -97,11 +101,11 @@ public class UserService {
 * //
 //    @GetMapping("/test")
 //    @ResponseBody
-//    public String testOne(@RequestHeader("X-AUTH-TOKEN") String token) {
-//        if( jwtTokenProvider.validateToken(token)) {
-//            return "토큰 유효함";
-//        }else {
-//            return "토큰 유효하지 않음";
-//        }
-//    }
+    public String testOne(@RequestHeader("X-AUTH-TOKEN") String token) {
+        if( jwtTokenProvider.validateToken(token)) {
+            return "토큰 유효함";
+        }else {
+            return "토큰 유효하지 않음";
+        }
+    }
 * */

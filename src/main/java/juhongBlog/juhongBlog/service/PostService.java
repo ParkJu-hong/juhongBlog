@@ -25,7 +25,10 @@ public class PostService {
 
 
     // 게시물 게시
-    public String createPost(Post post, Long userId, Long categoryId, Long tagId, List<Image> images){
+    public String createPost(Post post, Long userId, Long categoryId, Long tagId, List<Image> images, String token){
+        if(!jwtTokenProvider.validateToken(token)) {
+            return "토큰 유효하지 않음";
+        }
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Long _userId;
@@ -79,7 +82,11 @@ public class PostService {
     }
 
     // 게시물 수정
-    public String updatePost(Long postId, Post post, Long userId, Long categoryId, Long tagId, List<Image> images){
+    public String updatePost(Long postId, Post post, Long userId, Long categoryId, Long tagId, List<Image> images, String token){
+        if(!jwtTokenProvider.validateToken(token)) {
+            return "토큰 유효하지 않음";
+        }
+
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Long _userId;
@@ -134,7 +141,10 @@ public class PostService {
     }
 
     // 게시물 삭제
-    public String deletePost (Long postId) {
+    public String deletePost (Long postId, String token) {
+        if(!jwtTokenProvider.validateToken(token)) {
+            return "토큰 유효하지 않음";
+        }
         postRepository.deleteById(postId);
         return "post 삭제 완료";
     }

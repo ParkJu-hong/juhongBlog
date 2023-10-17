@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -17,10 +18,10 @@ public class CommentController {
     private final CommentService commentService;
 
     // 댓글 추가
-    @PostMapping("comment/create")
+    @PostMapping("/user/comment/create")
     @ResponseBody
-    public Long createComment(@RequestBody Comment comment, User user, Post post){
-        return commentService.createComment(comment, user, post);
+    public String createComment(@RequestBody Comment comment, User user, Post post, @RequestHeader("X-AUTH-TOKEN") String token){
+        return commentService.createComment(comment, user, post, token);
     }
 
 }

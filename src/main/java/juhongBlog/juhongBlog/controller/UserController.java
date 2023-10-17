@@ -4,10 +4,7 @@ import juhongBlog.juhongBlog.domain.User;
 import juhongBlog.juhongBlog.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -39,10 +36,10 @@ public class UserController {
     }
 
     // 비밀번호 변경
-    @PostMapping("/chagepassword")
+    @PostMapping("/user/chagepassword")
     @ResponseBody
-    public String changePassWord(@RequestBody Map<String, String> user) {
-        return userService.changePassword(Long.parseLong(user.get("userId")), user.get("beforePassWord"), user.get("afterPassWord"));
+    public String changePassWord(@RequestBody Map<String, String> user, @RequestHeader("X-AUTH-TOKEN") String token) {
+        return userService.changePassword(Long.parseLong(user.get("userId")), user.get("beforePassWord"), user.get("afterPassWord"), token);
     }
 
 }
