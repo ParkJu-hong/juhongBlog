@@ -21,7 +21,6 @@ public class PostService {
     private final PostRepository postRepository;
     private final CategoryRepository categoryRepository;
     private final TagRepository tagRepository;
-    private final CommentRepository commentRepository;
     private final ImageRepository imageRepository;
 
 
